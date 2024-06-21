@@ -1,5 +1,6 @@
 import { Container } from '../../src/scene/container/Container';
 import { Matrix } from '../../src/maths/matrix/Matrix';
+import { PointData } from '../../src/maths/point/PointData';
 
 describe('Container', () =>
 {
@@ -92,17 +93,33 @@ describe('Container', () =>
             expect(container.skew.x).toEqual(3);
             expect(container.skew.y).toEqual(4);
         });
+
+        // Andras 6
+        it('should correctly set the scale of the container', () =>
+        {
+            const container = new Container();
+
+            container.scale = 2;
+            expect(container.scale.x).toEqual(2);
+            expect(container.scale.y).toEqual(2);
+
+            const pointData: PointData = { x: 3, y: 4 };
+
+            container.scale = pointData;
+            expect(container.scale.x).toEqual(pointData.x);
+            expect(container.scale.y).toEqual(pointData.y);
+        });
     });
 
     // Test Suite - Andras
     describe('setFromMatrix', () =>
     {
-        // Andras 6
-        it('should decompose the matrix into the container', () => {
+        // Andras 7
+        it('should decompose the matrix into the container', () =>
+        {
             const container = new Container();
             const matrix = new Matrix();
 
-            // Set some values on the matrix
             matrix.a = 1;
             matrix.b = 2;
             matrix.c = 3;
@@ -121,8 +138,8 @@ describe('Container', () =>
 
             expect(container.position.x).toEqual(matrix.tx);
             expect(container.position.y).toEqual(matrix.ty);
-            expect(container.scale.x).toEqual(Math.sqrt(matrix.a * matrix.a + matrix.b * matrix.b));
-            expect(container.scale.y).toEqual(Math.sqrt(matrix.c * matrix.c + matrix.d * matrix.d));
+            expect(container.scale.x).toEqual(Math.sqrt((matrix.a * matrix.a) + (matrix.b * matrix.b)));
+            expect(container.scale.y).toEqual(Math.sqrt((matrix.c * matrix.c) + (matrix.d * matrix.d)));
             expect(container.rotation).toEqual(expectedRotation);
         });
     });

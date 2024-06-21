@@ -64,7 +64,7 @@ describe('RoundedRectangle', () =>
         expect(rrect4.contains(5, 5)).toBe(true);
     });
 
-    // Andras 6
+    // Andras 7
     it('should copy from another rounded rectangle', () =>
     {
         const rrect1 = new RoundedRectangle(0, 0, 100, 100, 40);
@@ -79,7 +79,7 @@ describe('RoundedRectangle', () =>
         expect(rrect2.radius).toEqual(40);
     });
 
-    // Andras 7
+    // Andras 8
     it('should copy to another rounded rectangle', () =>
     {
         const rrect1 = new RoundedRectangle(0, 0, 100, 100, 40);
@@ -94,7 +94,7 @@ describe('RoundedRectangle', () =>
         expect(rrect2.radius).toEqual(40);
     });
 
-    // Andras 8
+    // Andras 9
     it('should get the bounds of the rounded rectangle', () =>
     {
         const rrect = new RoundedRectangle(5, 5, 1, 1);
@@ -107,7 +107,7 @@ describe('RoundedRectangle', () =>
         expect(bounds.height).toEqual(1);
     });
 
-    // Andras 9
+    // Andras 10
     it('should correctly determine if a point is within the stroke of the rectangle', () =>
     {
         const rectangle = new RoundedRectangle();
