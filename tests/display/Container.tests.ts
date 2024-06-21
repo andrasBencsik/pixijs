@@ -75,8 +75,9 @@ describe('Container', () =>
         it('should set pivot correctly when a point is passed', () =>
         {
             const container = new Container();
+            const point: PointData = { x: 100, y: 200 };
 
-            container.pivot = { x: 100, y: 200 };
+            container.pivot = point;
 
             expect(container.pivot.x).toEqual(100);
             expect(container.pivot.y).toEqual(200);
@@ -86,7 +87,7 @@ describe('Container', () =>
         it('should copyFrom point to skew correctly', () =>
         {
             const container = new Container();
-            const point = { x: 3, y: 4 };
+            const point: PointData = { x: 3, y: 4 };
 
             container.skew = point;
 
@@ -103,11 +104,11 @@ describe('Container', () =>
             expect(container.scale.x).toEqual(2);
             expect(container.scale.y).toEqual(2);
 
-            const pointData: PointData = { x: 3, y: 4 };
+            const point: PointData = { x: 3, y: 4 };
 
-            container.scale = pointData;
-            expect(container.scale.x).toEqual(pointData.x);
-            expect(container.scale.y).toEqual(pointData.y);
+            container.scale = point;
+            expect(container.scale.x).toEqual(point.x);
+            expect(container.scale.y).toEqual(point.y);
         });
     });
 
