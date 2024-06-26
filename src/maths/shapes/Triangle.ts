@@ -3,6 +3,7 @@ import { Rectangle } from './Rectangle';
 
 import type { SHAPE_PRIMITIVE } from '../misc/const';
 import type { ShapePrimitive } from './ShapePrimitive';
+import { coverageResults } from '../../../customCoverageTool';
 
 /**
  * A class to define a shape of a triangle via user defined coordinates.
@@ -85,7 +86,14 @@ export class Triangle implements ShapePrimitive
         const t = ((this.x2 - this.x) * (y - this.y)) - ((this.y2 - this.y) * (x - this.x));
 
         if ((s < 0) !== (t < 0) && s !== 0 && t !== 0)
-        { return false; }
+        {
+            coverageResults['Triangle.contains1'] = true;
+            return false;
+        }
+        else
+        {
+            coverageResults['Triangle.contains2'] = true;
+        }
 
         const d = ((this.x3 - this.x2) * (y - this.y2)) - ((this.y3 - this.y2) * (x - this.x2));
 
@@ -110,7 +118,12 @@ export class Triangle implements ShapePrimitive
             || squaredDistanceToLineSegment(pointX, pointY, x2, y2, x3, y3) <= halfStrokeWidthSquared
             || squaredDistanceToLineSegment(pointX, pointY, x3, y3, x, y) <= halfStrokeWidthSquared)
         {
+            coverageResults['Triangle.strokeContains1'] = true;
             return true;
+        }
+        else
+        {
+            coverageResults['Triangle.strokeContains2'] = true;
         }
 
         return false;
