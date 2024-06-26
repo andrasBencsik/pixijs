@@ -1,6 +1,8 @@
 import { Container } from '../../src/scene/container/Container';
 import { Matrix } from '../../src/maths/matrix/Matrix';
 import { PointData } from '../../src/maths/point/PointData';
+import { writeFileSync } from 'fs-extra';
+import { coverageResults } from '../../customCoverageTool';
 
 describe('Container', () =>
 {
@@ -110,6 +112,11 @@ describe('Container', () =>
             expect(container.scale.x).toEqual(point.x);
             expect(container.scale.y).toEqual(point.y);
         });
+
+        afterEach(() =>
+        {
+            writeFileSync('coverageResults.json', JSON.stringify(coverageResults, null, 2));
+        });
     });
 
     // Test Suite - Andras
@@ -142,6 +149,11 @@ describe('Container', () =>
             expect(container.scale.x).toEqual(Math.sqrt((matrix.a * matrix.a) + (matrix.b * matrix.b)));
             expect(container.scale.y).toEqual(Math.sqrt((matrix.c * matrix.c) + (matrix.d * matrix.d)));
             expect(container.rotation).toEqual(expectedRotation);
+        });
+
+        afterEach(() =>
+        {
+            writeFileSync('coverageResults.json', JSON.stringify(coverageResults, null, 2));
         });
     });
 
@@ -186,6 +198,11 @@ describe('Container', () =>
             expect(object.scale.x).toEqual(1);
             expect(object.scale.y).toEqual(1);
         });
+
+        afterEach(() =>
+        {
+            writeFileSync('coverageResults.json', JSON.stringify(coverageResults, null, 2));
+        });
     });
 
     describe('destroy', () =>
@@ -227,6 +244,11 @@ describe('Container', () =>
             expect(container.children.length).toEqual(0);
             expect(container.destroyed).toBeTrue();
             expect(child.destroyed).toBeTrue();
+        });
+
+        afterEach(() =>
+        {
+            writeFileSync('coverageResults.json', JSON.stringify(coverageResults, null, 2));
         });
     });
 });
