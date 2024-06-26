@@ -7,6 +7,8 @@ import type { File } from '@babel/types';
 const filePaths: string[] = [
     'src/maths/shapes/RoundedRectangle.ts',
     'src/scene/container/Container.ts',
+    'src/math/point/ObservablePoint.ts',
+    'src/scene/sprite-tiling/TilingSprite.ts',
 ];
 
 const coverageResults: Record<string, boolean> = {};

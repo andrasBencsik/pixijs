@@ -1,5 +1,7 @@
 import type { PointData } from './PointData';
 import type { PointLike } from './PointLike';
+import { coverageResults } from '../../../customCoverageTool'; 
+
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface ObservablePoint extends PixiMixins.ObservablePoint { }
@@ -66,10 +68,16 @@ export class ObservablePoint implements PointLike
     {
         if (this._x !== x || this._y !== y)
         {
+            coverageResults['ObservablePoint.set1'] = true;
             this._x = x;
             this._y = y;
             this._observer._onUpdate(this);
+        } //added hidden else branch
+        else
+        {
+            coverageResults['ObervablePoint.set2'] = true;
         }
+        
 
         return this;
     }
@@ -83,9 +91,14 @@ export class ObservablePoint implements PointLike
     {
         if (this._x !== p.x || this._y !== p.y)
         {
+            coverageResults['ObservablePoint.copyFrom1'] = true;
             this._x = p.x;
             this._y = p.y;
             this._observer._onUpdate(this);
+        }// added hidden else branch
+        else
+        {
+            coverageResults['ObservablePoint.copyFrom2'] = true;
         }
 
         return this;
@@ -130,8 +143,14 @@ export class ObservablePoint implements PointLike
     {
         if (this._x !== value)
         {
+            coverageResults['ObservablePoint.setx1'] = true;
             this._x = value;
             this._observer._onUpdate(this);
+        }
+        // added hidden else branch
+        else
+        {
+            coverageResults['ObservablePoint.setx2'] = true;
         }
     }
 
@@ -145,8 +164,14 @@ export class ObservablePoint implements PointLike
     {
         if (this._y !== value)
         {
+            coverageResults['ObservablePoint.sety1'] = true;
             this._y = value;
             this._observer._onUpdate(this);
+        }
+        //added hidden else branch
+        else
+        {
+            coverageResults['ObservablePoint.sety2'] = true;
         }
     }
 }

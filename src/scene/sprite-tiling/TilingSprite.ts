@@ -11,6 +11,7 @@ import type { View } from '../../rendering/renderers/shared/view/View';
 import type { Bounds, BoundsData } from '../container/bounds/Bounds';
 import type { ContainerOptions } from '../container/Container';
 import type { DestroyOptions } from '../container/destroyTypes';
+import { coverageResults } from '../../../customCoverageTool';
 
 /**
  * Constructor options used for `TilingSprite` instances. Extends {@link scene.TilingSpriteViewOptions}
@@ -102,10 +103,16 @@ export class TilingSprite extends Container implements View, Instruction
     {
         if (typeof source === 'string')
         {
+            coverageResults['TilingSprite.staticfrom1'] = true;
             return new TilingSprite({
                 texture: Cache.get(source),
                 ...options,
             });
+        }
+        //added hidden else
+        else
+        {
+            coverageResults['TilingSprite.staticfrom2'] = true;
         }
 
         return new TilingSprite({
@@ -160,17 +167,29 @@ export class TilingSprite extends Container implements View, Instruction
 
         if (options instanceof Texture)
         {
+            coverageResults['TilingSprite.constructor1'] = true;
             options = { texture: options };
+        }
+        //added hidden else
+        else
+        {
+            coverageResults['TilingSprite.constructor2'] = true;
         }
 
         if (args.length > 1)
         {
             // #if _DEBUG
+            coverageResults['TilingSprite.constructor3'] = true;
             deprecation(v8_0_0, 'use new TilingSprite({ texture, width:100, height:100 }) instead');
             // #endif
 
             options.width = args[1];
             options.height = args[2];
+        }
+        //added hidden else
+        else
+        {
+            coverageResults['TilingSprite.constructor4'] = true;
         }
 
         options = { ...TilingSprite.defaultOptions, ...options };
@@ -217,7 +236,16 @@ export class TilingSprite extends Container implements View, Instruction
             }
         });
 
-        if (anchor) this.anchor = anchor;
+        if (anchor) {
+          coverageResults['TilingSprite.constructor5'] = true;
+          this.anchor = anchor;
+        }
+        //added hidden else
+        else
+        {
+            coverageResults['TilingSprite.constructor6'] = true;
+        }
+
         this.tilePosition = tilePosition;
         this.tileScale = tileScale;
         this.tileRotation = tileRotation;
@@ -329,8 +357,14 @@ export class TilingSprite extends Container implements View, Instruction
     {
         if (this._boundsDirty)
         {
+            coverageResults['TilingSprite.getbounds1'] = true;
             this._updateBounds();
             this._boundsDirty = false;
+        }
+        //added hidden else branch
+        else
+        {
+            coverageResults['TilingSprite.getbounds2'] = true;
         }
 
         return this._bounds;
@@ -342,10 +376,38 @@ export class TilingSprite extends Container implements View, Instruction
 
         const currentTexture = this._texture;
 
-        if (currentTexture === value) return;
+        if (currentTexture === value) {
+            coverageResults['TilingSprite.texture1'] = true;
+         return;
+        }
+        //added hidden else branch
+        else
+        {
+            coverageResults['TilingSprite.texture2'] = true;
+        }
 
-        if (currentTexture && currentTexture.dynamic) currentTexture.off('update', this.onViewUpdate, this);
-        if (value.dynamic) value.on('update', this.onViewUpdate, this);
+        if (currentTexture && currentTexture.dynamic){
+         
+        coverageResults['TilingSprite.texture3'] = true;
+        currentTexture.off('update', this.onViewUpdate, this);
+        }
+        //added hidden else branch
+        else
+        {
+            coverageResults['TilingSprite.texture4'] = true;
+        }
+
+
+        if (value.dynamic){
+          
+        coverageResults['TilingSprite.texture5'] = true;
+        value.on('update', this.onViewUpdate, this);
+        }
+        //added hidden else branch
+        else
+        {
+            coverageResults['TilingSprite.texture6'] = true;
+        }
 
         this._texture = value;
 
@@ -427,9 +489,24 @@ export class TilingSprite extends Container implements View, Instruction
 
         if (point.x >= x1 && point.x <= x1 + width)
         {
+
+            coverageResults['TilingSprite.containsPoint1'] = true;
             y1 = -height * this._anchor._y;
 
-            if (point.y >= y1 && point.y <= y1 + height) return true;
+            if (point.y >= y1 && point.y <= y1 + height){
+                coverageResults['TilingSprite.containsPoint2'] = true;
+             return true;
+            }
+            //added hidden else
+            else
+            {
+                coverageResults['TilingSprite.containsPoint3'] = true;
+            }
+        }
+        //added hidden else
+        else
+        {
+            coverageResults['TilingSprite.containsPoint4'] = true;
         }
 
         return false;
@@ -442,14 +519,29 @@ export class TilingSprite extends Container implements View, Instruction
 
         this._didChangeId += 1 << 12;
 
-        if (this.didViewUpdate) return;
+        if (this.didViewUpdate){
+         coverageResults['TilingSprite.onViewUpdate1'] = true;
+         return;
+        }
+        //added hidden else
+        else
+        {
+            coverageResults['TilingSprite.onViewUpdate2'] = true;
+        }
+
         this.didViewUpdate = true;
 
         const renderGroup = this.renderGroup || this.parentRenderGroup;
 
         if (renderGroup)
         {
+            coverageResults['TilingSprite.onViewUpdate3'] = true;
             renderGroup.onChildViewUpdate(this);
+        }
+        //added hidden else
+        else
+        {
+            coverageResults['TilingSprite.onViewUpdate4'] = true;
         }
     }
 
@@ -472,9 +564,15 @@ export class TilingSprite extends Container implements View, Instruction
 
         if (destroyTexture)
         {
+            coverageResults['TilingSprite.destroy1'] = true;
             const destroyTextureSource = typeof options === 'boolean' ? options : options?.textureSource;
 
             this._texture.destroy(destroyTextureSource);
+        }
+        //added hidden else branch
+        else
+        {
+            coverageResults['TilingSprite.destroy2'] = true;
         }
 
         this._texture = null;

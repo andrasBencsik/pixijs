@@ -10,6 +10,8 @@ import '../../../src/scene/sprite-tiling/init';
 import '../../../src/scene/mesh/init';
 
 import type { TextureSource } from '../../../src/rendering/renderers/shared/texture/sources/TextureSource';
+import { coverageResults } from '../../../customCoverageTool';
+import { writeFileSync } from 'fs-extra';
 
 describe('TilingSprite', () =>
 {
@@ -120,6 +122,11 @@ describe('TilingSprite', () =>
         });
     });
 
+    afterEach(() =>
+        {
+            writeFileSync('coverageResults.json', JSON.stringify(coverageResults, null, 2));
+        });
+
     describe('ClampMargin', () =>
     {
         it('should clamp margin correctly', () =>
@@ -201,6 +208,11 @@ describe('TilingSprite', () =>
             });
         });
 
+        afterEach(() =>
+            {
+                writeFileSync('coverageResults.json', JSON.stringify(coverageResults, null, 2));
+            });
+
         describe('Destroy', () =>
         {
             it('should destroy the texture when destroyTexture is true', () =>
@@ -236,6 +248,11 @@ describe('TilingSprite', () =>
             });
         }); 
     });
+
+    afterEach(() =>
+        {
+            writeFileSync('coverageResults.json', JSON.stringify(coverageResults, null, 2));
+        });
 
     describe('Geometry', () =>
     {
@@ -294,6 +311,11 @@ describe('TilingSprite', () =>
         });
     });
 
+    afterEach(() =>
+        {
+            writeFileSync('coverageResults.json', JSON.stringify(coverageResults, null, 2));
+        });
+
     describe('Texture Construction', () =>
     {
         it('should build from given texture', () =>
@@ -315,6 +337,11 @@ describe('TilingSprite', () =>
         });
     });
 
+    afterEach(() =>
+        {
+            writeFileSync('coverageResults.json', JSON.stringify(coverageResults, null, 2));
+        });
+
     describe('Anchor', () =>
     {
         it('should update anchor', () =>
@@ -331,4 +358,15 @@ describe('TilingSprite', () =>
             expect(spy).toHaveBeenCalledTimes(1);
         });
     });
+
+    afterEach(() =>
+        {
+            writeFileSync('coverageResults.json', JSON.stringify(coverageResults, null, 2));
+        });
+    
 });
+
+afterEach(() =>
+    {
+        writeFileSync('coverageResults.json', JSON.stringify(coverageResults, null, 2));
+    });

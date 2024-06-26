@@ -1,5 +1,7 @@
 import { ObservablePoint } from '../../src/maths/point/ObservablePoint';
 import { PointData } from '../../src/maths/point/PointData';
+import { coverageResults } from '../../customCoverageTool';
+import { writeFileSync } from 'fs-extra';
 
 describe('ObservablePoint', () =>
 {
@@ -89,5 +91,12 @@ describe('ObservablePoint', () =>
 
         expect(observablePoint.equals(point)).toBe(true);
     }); 
+
+    afterEach(() =>
+        {
+            writeFileSync('coverageResults.json', JSON.stringify(coverageResults, null, 2));
+        });
+
+    
 });
 
