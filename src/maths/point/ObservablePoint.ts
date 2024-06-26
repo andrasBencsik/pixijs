@@ -2,7 +2,6 @@ import type { PointData } from './PointData';
 import type { PointLike } from './PointLike';
 import { coverageResults } from '../../../customCoverageTool'; 
 
-
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface ObservablePoint extends PixiMixins.ObservablePoint { }
 
@@ -72,13 +71,12 @@ export class ObservablePoint implements PointLike
             this._x = x;
             this._y = y;
             this._observer._onUpdate(this);
-        } //added hidden else branch
+        } // added hidden else branch
         else
         {
-            coverageResults['ObervablePoint.set2'] = true;
+            coverageResults['ObservablePoint.set2'] = true;
         }
         
-
         return this;
     }
 
@@ -168,7 +166,7 @@ export class ObservablePoint implements PointLike
             this._y = value;
             this._observer._onUpdate(this);
         }
-        //added hidden else branch
+        // added hidden else branch
         else
         {
             coverageResults['ObservablePoint.sety2'] = true;

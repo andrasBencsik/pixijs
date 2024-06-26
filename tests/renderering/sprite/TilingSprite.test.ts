@@ -10,13 +10,9 @@ import '../../../src/scene/sprite-tiling/init';
 import '../../../src/scene/mesh/init';
 
 import type { TextureSource } from '../../../src/rendering/renderers/shared/texture/sources/TextureSource';
-<<<<<<< HEAD
-import { coverageResults } from '../../../customCoverageTool';
-import { writeFileSync } from 'fs-extra';
-=======
+
 import { writeFileSync } from 'fs-extra';
 import { coverageResults } from '../../../customCoverageTool';
->>>>>>> origin/assignment1
 
 describe('TilingSprite', () =>
 {
@@ -132,11 +128,6 @@ describe('TilingSprite', () =>
             });
     });
 
-    afterEach(() =>
-        {
-            writeFileSync('coverageResults.json', JSON.stringify(coverageResults, null, 2));
-        });
-
     describe('ClampMargin', () =>
     {
         it('should clamp margin correctly', () =>
@@ -223,11 +214,6 @@ describe('TilingSprite', () =>
                 });
         });
 
-        afterEach(() =>
-            {
-                writeFileSync('coverageResults.json', JSON.stringify(coverageResults, null, 2));
-            });
-
         describe('Destroy', () =>
         {
             it('should destroy the texture when destroyTexture is true', () =>
@@ -274,10 +260,6 @@ describe('TilingSprite', () =>
             });
     });
 
-    afterEach(() =>
-        {
-            writeFileSync('coverageResults.json', JSON.stringify(coverageResults, null, 2));
-        });
 
     describe('Geometry', () =>
     {
@@ -334,12 +316,13 @@ describe('TilingSprite', () =>
             expect(sprite.width).toEqual(400);
             expect(sprite.height).toEqual(600);
         });
+        afterEach(() =>
+            {
+                writeFileSync('coverageResults.json', JSON.stringify(coverageResults, null, 2));
+            });
     });
 
-    afterEach(() =>
-        {
-            writeFileSync('coverageResults.json', JSON.stringify(coverageResults, null, 2));
-        });
+    
 
     describe('Texture Construction', () =>
     {
@@ -367,11 +350,6 @@ describe('TilingSprite', () =>
         });
     });
 
-    afterEach(() =>
-        {
-            writeFileSync('coverageResults.json', JSON.stringify(coverageResults, null, 2));
-        });
-
     describe('Anchor', () =>
     {
         it('should update anchor', () =>
@@ -392,16 +370,5 @@ describe('TilingSprite', () =>
             {
                 writeFileSync('coverageResults.json', JSON.stringify(coverageResults,null,2));
             });
-    });
-
-    afterEach(() =>
-        {
-            writeFileSync('coverageResults.json', JSON.stringify(coverageResults, null, 2));
-        });
-    
+    });    
 });
-
-afterEach(() =>
-    {
-        writeFileSync('coverageResults.json', JSON.stringify(coverageResults, null, 2));
-    });

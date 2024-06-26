@@ -1,6 +1,6 @@
 import { Container } from '../../src/scene/container/Container';
 import { coverageResults } from '../../customCoverageTool';
-import { write, writeFileSync } from 'fs-extra';
+import { writeFileSync } from 'fs-extra';
 
 describe('Container Sort', () =>
 {
