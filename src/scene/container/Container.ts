@@ -1,4 +1,5 @@
 import EventEmitter from 'eventemitter3';
+import { coverageResults } from '../../../customCoverageTool';
 import { Color, type ColorSource } from '../../color/Color';
 import { cullingMixin } from '../../culling/cullingMixin';
 import { Matrix } from '../../maths/matrix/Matrix';
@@ -605,12 +606,18 @@ export class Container<C extends ContainerChild = ContainerChild> extends EventE
         // #if _DEBUG
         if (!this.allowChildren)
         {
+            coverageResults['Container.addChild1'] = true;
             deprecation(v8_0_0, 'addChild: Only Containers will be allowed to add children in v8.0.0');
+        } // added hidden else branch
+        else
+        {
+            coverageResults['Container.addChild2'] = true;
         }
         // #endif
 
         if (children.length > 1)
         {
+            coverageResults['Container.addChild3'] = true;
             // loop through the array and add all children
             for (let i = 0; i < children.length; i++)
             {
@@ -618,33 +625,60 @@ export class Container<C extends ContainerChild = ContainerChild> extends EventE
             }
 
             return children[0];
+        } // added hidden else branch
+        else
+        {
+            coverageResults['Container.addChild4'] = true;
         }
 
         const child = children[0];
 
         if (child.parent === this)
         {
+            coverageResults['Container.addChild5'] = true;
             this.children.splice(this.children.indexOf(child), 1);
             this.children.push(child);
 
             if (this.parentRenderGroup)
             {
+                coverageResults['Container.addChild6'] = true;
                 this.parentRenderGroup.structureDidChange = true;
+            }
+            // added hidden else branch
+            else
+            {
+                coverageResults['Container.addChild7'] = true;
             }
 
             return child;
+        } // added hidden else branch
+        else
+        {
+            coverageResults['Container.addChild8'] = true;
         }
 
         if (child.parent)
         {
+            coverageResults['Container.addChild9'] = true;
             // TODO Optimisation...if the parent has the same render group, this does not need to change!
             child.parent.removeChild(child);
+        } // added hidden else branch
+        else
+        {
+            coverageResults['Container.addChild10'] = true;
         }
 
         this.children.push(child);
 
-        if (this.sortableChildren) this.sortDirty = true;
-
+        if (this.sortableChildren)
+        {
+            coverageResults['Container.addChild11'] = true;
+            this.sortDirty = true;
+        } // added hidden else branch
+        else
+        {
+            coverageResults['Container.addChild12'] = true;
+        }
         child.parent = this;
 
         child.didChange = true;
@@ -657,7 +691,12 @@ export class Container<C extends ContainerChild = ContainerChild> extends EventE
 
         if (renderGroup)
         {
+            coverageResults['Container.addChild13'] = true;
             renderGroup.addChild(child);
+        } // added hidden else branch
+        else
+        {
+            coverageResults['Container.addChild14'] = true;
         }
 
         this.emit('childAdded', child, this, this.children.length - 1);
@@ -667,7 +706,12 @@ export class Container<C extends ContainerChild = ContainerChild> extends EventE
 
         if (child._zIndex !== 0)
         {
+            coverageResults['Container.addChild15'] = true;
             child.depthOfChildModified();
+        } // added hidden else branch
+        else
+        {
+            coverageResults['Container.addChild16'] = true;
         }
 
         return child;
@@ -683,6 +727,7 @@ export class Container<C extends ContainerChild = ContainerChild> extends EventE
         // if there is only one argument we can bypass looping through the them
         if (children.length > 1)
         {
+            coverageResults['Container.removeChild1'] = true;
             // loop through the arguments property and remove all children
             for (let i = 0; i < children.length; i++)
             {
@@ -691,6 +736,10 @@ export class Container<C extends ContainerChild = ContainerChild> extends EventE
 
             return children[0];
         }
+        else
+        {
+            coverageResults['Container.branchAddedPost1'] = true;
+        }
 
         const child = children[0];
 
@@ -698,22 +747,33 @@ export class Container<C extends ContainerChild = ContainerChild> extends EventE
 
         if (index > -1)
         {
+            coverageResults['Container.removeChild3'] = true;
             this._didChangeId += 1 << 12;
 
             this.children.splice(index, 1);
 
             if (this.renderGroup)
             {
+                coverageResults['Container.removeChild4'] = true;
                 this.renderGroup.removeChild(child);
             }
             else if (this.parentRenderGroup)
             {
+                coverageResults['Container.removeChild5'] = true;
                 this.parentRenderGroup.removeChild(child);
+            } // added hidden else branch
+            else
+            {
+                coverageResults['Container.removeChild6'] = true;
             }
 
             child.parent = null;
             this.emit('childRemoved', child, this, index);
             child.emit('removed', this);
+        } // added hidden else branch
+        else
+        {
+            coverageResults['Container.removeChild7'] = true;
         }
 
         return child;
@@ -724,22 +784,46 @@ export class Container<C extends ContainerChild = ContainerChild> extends EventE
     {
         if (point)
         {
+            coverageResults['Container._onUpdate1'] = true;
             //   this.updateFlags |= UPDATE_TRANSFORM;
 
             if (point === this._skew)
             {
+                coverageResults['Container._onUpdate2'] = true;
                 this._updateSkew();
+            } // added hidden else branch
+            else
+            {
+                coverageResults['Container._onUpdate3'] = true;
             }
+        } // added hidden else branch
+        else
+        {
+            coverageResults['Container._onUpdate4'] = true;
         }
 
         this._didChangeId++;
 
-        if (this.didChange) return;
+        if (this.didChange)
+        {
+            coverageResults['Container._onUpdate5'] = true;
+
+            return;
+        } // added hidden else branch
+        else
+        {
+            coverageResults['Container._onUpdate6'] = true;
+        }
         this.didChange = true;
 
         if (this.parentRenderGroup)
         {
+            coverageResults['Container._onUpdate7'] = true;
             this.parentRenderGroup.onChildUpdate(this);
+        } // added hidden else branch
+        else
+        {
+            coverageResults['Container._onUpdate8'] = true;
         }
     }
 
@@ -747,12 +831,22 @@ export class Container<C extends ContainerChild = ContainerChild> extends EventE
     {
         if (this.renderGroup && value === false)
         {
+            coverageResults['Container.isRenderGroup1'] = true;
             throw new Error('[Pixi] cannot undo a render group just yet');
+        } // added hidden else branch
+        else
+        {
+            coverageResults['Container.isRenderGroup2'] = true;
         }
 
         if (value)
         {
+            coverageResults['Container.isRenderGroup3'] = true;
             this.enableRenderGroup();
+        } // added hidden else branch
+        else
+        {
+            coverageResults['Container.isRenderGroup4'] = true;
         }
     }
 
@@ -769,20 +863,39 @@ export class Container<C extends ContainerChild = ContainerChild> extends EventE
     public enableRenderGroup()
     {
         // does it OWN the render group..
-        if (this.renderGroup) return;
+        if (this.renderGroup)
+        {
+            coverageResults['Container.enableRenderGroup1'] = true;
+
+            return;
+        } // added hidden else branch
+        else
+        {
+            coverageResults['Container.enableRenderGroup2'] = true;
+        }
 
         const parentRenderGroup = this.parentRenderGroup;
 
         if (parentRenderGroup)
         {
+            coverageResults['Container.enableRenderGroup3'] = true;
             parentRenderGroup.removeChild(this);
+        } // added hidden else branch
+        else
+        {
+            coverageResults['Container.enableRenderGroup4'] = true;
         }
 
         this.renderGroup = new RenderGroup(this);
 
         if (parentRenderGroup)
         {
+            coverageResults['Container.enableRenderGroup5'] = true;
             parentRenderGroup.addChild(this);
+        } // added hidden else branch
+        else
+        {
+            coverageResults['Container.enableRenderGroup6'] = true;
         }
 
         this._updateIsSimple();
@@ -808,11 +921,17 @@ export class Container<C extends ContainerChild = ContainerChild> extends EventE
 
         if (this.renderGroup)
         {
+            coverageResults['Container.worldTransform1'] = true;
             this._worldTransform.copyFrom(this.renderGroup.worldTransform);
         }
         else if (this.parentRenderGroup)
         {
+            coverageResults['Container.worldTransform2'] = true;
             this._worldTransform.appendFrom(this.relativeGroupTransform, this.parentRenderGroup.worldTransform);
+        } // added hidden else branch
+        else
+        {
+            coverageResults['Container.worldTransform3'] = true;
         }
 
         return this._worldTransform;
@@ -875,8 +994,13 @@ export class Container<C extends ContainerChild = ContainerChild> extends EventE
     {
         if (this._rotation !== value)
         {
+            coverageResults['Container.rotation1'] = true;
             this._rotation = value;
             this._onUpdate(this._skew);
+        } // added hidden else branch
+        else
+        {
+            coverageResults['Container.rotation2'] = true;
         }
     }
 
@@ -905,7 +1029,12 @@ export class Container<C extends ContainerChild = ContainerChild> extends EventE
     {
         if (this._pivot === defaultPivot)
         {
+            coverageResults['Container.pivot1'] = true;
             this._pivot = new ObservablePoint(this, 0, 0);
+        } // added hidden else branch
+        else
+        {
+            coverageResults['Container.pivot2'] = true;
         }
 
         return this._pivot;
@@ -915,7 +1044,12 @@ export class Container<C extends ContainerChild = ContainerChild> extends EventE
     {
         if (this._pivot === defaultPivot)
         {
+            coverageResults['Container.pivot3'] = true;
             this._pivot = new ObservablePoint(this, 0, 0);
+        } // added hidden else branch
+        else
+        {
+            coverageResults['Container.pivot4'] = true;
         }
 
         typeof value === 'number' ? this._pivot.set(value) : this._pivot.copyFrom(value);
@@ -929,7 +1063,12 @@ export class Container<C extends ContainerChild = ContainerChild> extends EventE
     {
         if (this._skew === defaultSkew)
         {
+            coverageResults['Container.skew1'] = true;
             this._skew = new ObservablePoint(this, 0, 0);
+        } // added hidden else branch
+        else
+        {
+            coverageResults['Container.skew2'] = true;
         }
 
         return this._skew;
@@ -939,7 +1078,12 @@ export class Container<C extends ContainerChild = ContainerChild> extends EventE
     {
         if (this._skew === defaultSkew)
         {
+            coverageResults['Container.skew3'] = true;
             this._skew = new ObservablePoint(this, 0, 0);
+        } // added hidden else branch
+        else
+        {
+            coverageResults['Container.skew4'] = true;
         }
 
         this._skew.copyFrom(value);
@@ -955,7 +1099,12 @@ export class Container<C extends ContainerChild = ContainerChild> extends EventE
     {
         if (this._scale === defaultScale)
         {
+            coverageResults['Container.scale1'] = true;
             this._scale = new ObservablePoint(this, 1, 1);
+        } // added hidden else branch
+        else
+        {
+            coverageResults['Container.scale2'] = true;
         }
 
         return this._scale;
@@ -965,7 +1114,12 @@ export class Container<C extends ContainerChild = ContainerChild> extends EventE
     {
         if (this._scale === defaultScale)
         {
+            coverageResults['Container.scale3'] = true;
             this._scale = new ObservablePoint(this, 0, 0);
+        } // added hidden else branch
+        else
+        {
+            coverageResults['Container.scale4'] = true;
         }
 
         typeof value === 'number' ? this._scale.set(value) : this._scale.copyFrom(value);
@@ -1014,7 +1168,12 @@ export class Container<C extends ContainerChild = ContainerChild> extends EventE
     {
         if (!out)
         {
+            coverageResults['Container.getSize1'] = true;
             out = {} as Size;
+        } // added hidden else branch
+        else
+        {
+            coverageResults['Container.getSize2'] = true;
         }
 
         const bounds = this.getLocalBounds();
@@ -1040,23 +1199,35 @@ export class Container<C extends ContainerChild = ContainerChild> extends EventE
 
         if (typeof value !== 'object')
         {
+            coverageResults['Container.setSize1'] = true;
             convertedWidth = value;
             convertedHeight = height ?? value;
         }
         else
         {
+            coverageResults['Container.setSize2'] = true;
             convertedWidth = value.width;
             convertedHeight = value.height ?? value.width;
         }
 
         if (convertedWidth !== undefined)
         {
+            coverageResults['Container.setSize3'] = true;
             this._setWidth(convertedWidth, size.width);
+        } // added hidden else branch
+        else
+        {
+            coverageResults['Container.setSize4'] = true;
         }
 
         if (convertedHeight !== undefined)
         {
+            coverageResults['Container.setSize5'] = true;
             this._setHeight(convertedHeight, size.height);
+        } // added hidden else branch
+        else
+        {
+            coverageResults['Container.setSize6'] = true;
         }
     }
 
@@ -1120,7 +1291,16 @@ export class Container<C extends ContainerChild = ContainerChild> extends EventE
     /** Updates the local transform. */
     public updateLocalTransform(): void
     {
-        if ((this._didLocalTransformChangeId & 0b1111) === this._didChangeId) return;
+        if ((this._didLocalTransformChangeId & 0b1111) === this._didChangeId)
+        {
+            coverageResults['Container.updateLocalTransform1'] = true;
+
+            return;
+        } // added hidden else branch
+        else
+        {
+            coverageResults['Container.updateLocalTransform2'] = true;
+        }
 
         this._didLocalTransformChangeId = this._didChangeId;
         //   this.didChange = false;
@@ -1150,7 +1330,16 @@ export class Container<C extends ContainerChild = ContainerChild> extends EventE
 
     set alpha(value: number)
     {
-        if (value === this.localAlpha) return;
+        if (value === this.localAlpha)
+        {
+            coverageResults['Container.alpha1'] = true;
+
+            return;
+        } // added hidden else branch
+        else
+        {
+            coverageResults['Container.alpha2'] = true;
+        }
 
         this.localAlpha = value;
 
@@ -1170,7 +1359,16 @@ export class Container<C extends ContainerChild = ContainerChild> extends EventE
         const tempColor = Color.shared.setValue(value ?? 0xFFFFFF);
         const bgr = tempColor.toBgrNumber();
 
-        if (bgr === this.localColor) return;
+        if (bgr === this.localColor)
+        {
+            coverageResults['Container.tint1'] = true;
+
+            return;
+        } // added hidden else branch
+        else
+        {
+            coverageResults['Container.tint2'] = true;
+        }
 
         this.localColor = bgr;
 
@@ -1197,10 +1395,25 @@ export class Container<C extends ContainerChild = ContainerChild> extends EventE
 
     set blendMode(value: BLEND_MODES)
     {
-        if (this.localBlendMode === value) return;
+        if (this.localBlendMode === value)
+        {
+            coverageResults['Container.blendMode1'] = true;
+
+            return;
+        } // added hidden else branch
+        else
+        {
+            coverageResults['Container.branchAddedPost8'] = true;
+        }
+
         if (this.parentRenderGroup)
         {
+            coverageResults['Container.blendMode399'] = true;
             this.parentRenderGroup.structureDidChange = true;
+        } // added hidden else branch
+        else
+        {
+            coverageResults['Container.blendMode4'] = true;
         }
 
         this._updateFlags |= UPDATE_BLEND;
@@ -1231,11 +1444,25 @@ export class Container<C extends ContainerChild = ContainerChild> extends EventE
     {
         const valueNumber = value ? 1 : 0;
 
-        if ((this.localDisplayStatus & 0b010) >> 1 === valueNumber) return;
+        if ((this.localDisplayStatus & 0b010) >> 1 === valueNumber)
+        {
+            coverageResults['Container.visible1'] = true;
+
+            return;
+        } // added hidden else branch
+        else
+        {
+            coverageResults['Container.visible2'] = true;
+        }
 
         if (this.parentRenderGroup)
         {
+            coverageResults['Container.visible3'] = true;
             this.parentRenderGroup.structureDidChange = true;
+        } // added hidden else branch
+        else
+        {
+            coverageResults['Container.visible4'] = true;
         }
 
         this._updateFlags |= UPDATE_VISIBLE;
@@ -1256,11 +1483,25 @@ export class Container<C extends ContainerChild = ContainerChild> extends EventE
     {
         const valueNumber = value ? 1 : 0;
 
-        if ((this.localDisplayStatus & 0b100) >> 2 === valueNumber) return;
+        if ((this.localDisplayStatus & 0b100) >> 2 === valueNumber)
+        {
+            coverageResults['Container.culled1'] = true;
+
+            return;
+        } // added hidden else branch
+        else
+        {
+            coverageResults['Container.culled2'] = true;
+        }
 
         if (this.parentRenderGroup)
         {
+            coverageResults['Container.culled3'] = true;
             this.parentRenderGroup.structureDidChange = true;
+        } // added hidden else branch
+        else
+        {
+            coverageResults['Container.culled4'] = true;
         }
 
         this._updateFlags |= UPDATE_VISIBLE;
@@ -1279,14 +1520,28 @@ export class Container<C extends ContainerChild = ContainerChild> extends EventE
     {
         const valueNumber = value ? 1 : 0;
 
-        if ((this.localDisplayStatus & 0b001) === valueNumber) return;
+        if ((this.localDisplayStatus & 0b001) === valueNumber)
+        {
+            coverageResults['Container.renderable1'] = true;
+
+            return;
+        } // added hidden else branch
+        else
+        {
+            coverageResults['Container.renderable2'] = true;
+        }
 
         this._updateFlags |= UPDATE_VISIBLE;
         this.localDisplayStatus ^= 0b001;
 
         if (this.parentRenderGroup)
         {
+            coverageResults['Container.renderable3'] = true;
             this.parentRenderGroup.structureDidChange = true;
+        } // added hidden else branch
+        else
+        {
+            coverageResults['Container.renderable4'] = true;
         }
 
         this._onUpdate();
@@ -1314,7 +1569,17 @@ export class Container<C extends ContainerChild = ContainerChild> extends EventE
      */
     public destroy(options: DestroyOptions = false): void
     {
-        if (this.destroyed) return;
+        if (this.destroyed)
+        {
+            coverageResults['Container.destroy1'] = true;
+
+            return;
+        } // added hidden else branch
+        else
+        {
+            coverageResults['Container.destroy2'] = true;
+        }
+
         this.destroyed = true;
 
         // remove children is faster than removeChild..
@@ -1338,10 +1603,15 @@ export class Container<C extends ContainerChild = ContainerChild> extends EventE
 
         if (destroyChildren)
         {
+            coverageResults['Container.destroy3'] = true;
             for (let i = 0; i < oldChildren.length; ++i)
             {
                 oldChildren[i].destroy(options);
             }
+        } // added hidden else branch
+        else
+        {
+            coverageResults['Container.destroy4'] = true;
         }
 
         this.renderGroup?.destroy();

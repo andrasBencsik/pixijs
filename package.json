@@ -10,6 +10,8 @@
     "dist"
   ],
   "scripts": {
+    "pretest": "ts-node testParser.ts",
+    "custom-coverage": "ts-node testParser.ts && ts-node runCoverageTool.ts",
     "prepare": "husky install",
     "start": "run-s watch",
     "clean": "run-s clean:*",

@@ -1,3 +1,5 @@
+import { writeFileSync } from 'fs-extra';
+import { coverageResults } from '../../customCoverageTool';
 import { RoundedRectangle } from '../../src/maths/shapes/RoundedRectangle';
 
 describe('RoundedRectangle', () =>
@@ -122,5 +124,10 @@ describe('RoundedRectangle', () =>
 
         expect(rectangle.strokeContains(1, 1, strokeWidth)).toBe(true);
         expect(rectangle.strokeContains(12, 12, strokeWidth)).toBe(false);
+    });
+
+    afterEach(() =>
+    {
+        writeFileSync('coverageResults.json', JSON.stringify(coverageResults, null, 2));
     });
 });

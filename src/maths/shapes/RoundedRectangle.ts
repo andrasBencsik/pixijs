@@ -1,3 +1,4 @@
+import { coverageResults } from '../../../customCoverageTool';
 import { Rectangle } from './Rectangle';
 
 import type { ShapePrimitive } from './ShapePrimitive';
@@ -142,18 +143,32 @@ export class RoundedRectangle implements ShapePrimitive
     {
         if (this.width <= 0 || this.height <= 0)
         {
+            coverageResults['RoundedRectangle.contains1'] = true;
+
             return false;
+        } // added hidden else branch
+        else
+        {
+            coverageResults['RoundedRectangle.contains2'] = true;
         }
         if (x >= this.x && x <= this.x + this.width)
         {
+            coverageResults['RoundedRectangle.contains3'] = true;
             if (y >= this.y && y <= this.y + this.height)
             {
+                coverageResults['RoundedRectangle.contains5'] = true;
                 const radius = Math.max(0, Math.min(this.radius, Math.min(this.width, this.height) / 2));
 
                 if ((y >= this.y + radius && y <= this.y + this.height - radius)
                 || (x >= this.x + radius && x <= this.x + this.width - radius))
                 {
+                    coverageResults['RoundedRectangle.contains7'] = true;
+
                     return true;
+                } // added hidden else branch
+                else
+                {
+                    coverageResults['RoundedRectangle.contains8'] = true;
                 }
                 let dx = x - (this.x + radius);
                 let dy = y - (this.y + radius);
@@ -161,24 +176,57 @@ export class RoundedRectangle implements ShapePrimitive
 
                 if ((dx * dx) + (dy * dy) <= radius2)
                 {
+                    coverageResults['RoundedRectangle.contains9'] = true;
+
                     return true;
+                } // added hidden else branch
+                else
+                {
+                    coverageResults['RoundedRectangle.contains10'] = true;
                 }
                 dx = x - (this.x + this.width - radius);
                 if ((dx * dx) + (dy * dy) <= radius2)
                 {
+                    coverageResults['RoundedRectangle.contains11'] = true;
+
                     return true;
+                } // added hidden else branch
+                else
+                {
+                    coverageResults['RoundedRectangle.contains12'] = true;
                 }
+
                 dy = y - (this.y + this.height - radius);
                 if ((dx * dx) + (dy * dy) <= radius2)
                 {
+                    coverageResults['RoundedRectangle.contains13'] = true;
+
                     return true;
+                } // added hidden else branch
+                else
+                {
+                    coverageResults['RoundedRectangle.contains14'] = true;
                 }
                 dx = x - (this.x + radius);
                 if ((dx * dx) + (dy * dy) <= radius2)
                 {
+                    coverageResults['RoundedRectangle.contains15'] = true;
+
                     return true;
+                } // added hidden else branch
+                else
+                {
+                    coverageResults['RoundedRectangle.contains16'] = true;
                 }
+            } // added hidden else branch
+            else
+            {
+                coverageResults['RoundedRectangle.contains6'] = true;
             }
+        } // added hidden else branch
+        else
+        {
+            coverageResults['RoundedRectangle.contains4'] = true;
         }
 
         return false;
@@ -208,7 +256,13 @@ export class RoundedRectangle implements ShapePrimitive
              || (pX >= rightBound - halfStrokeWidth && pX <= rightBound + halfStrokeWidth))
             && pY >= innerY && pY <= innerY + innerHeight)
         {
+            coverageResults['RoundedRectangle.strokeContains1'] = true;
+
             return true;
+        } // added hidden else branch
+        else
+        {
+            coverageResults['RoundedRectangle.strokeContains2'] = true;
         }
 
         // Check if point is within the horizontal edges (excluding corners)
@@ -216,7 +270,13 @@ export class RoundedRectangle implements ShapePrimitive
              || (pY >= bottomBound - halfStrokeWidth && pY <= bottomBound + halfStrokeWidth))
             && pX >= innerX && pX <= innerX + innerWidth)
         {
+            coverageResults['RoundedRectangle.strokeContains3'] = true;
+
             return true;
+        } // added hidden else branch
+        else
+        {
+            coverageResults['RoundedRectangle.strokeContains4'] = true;
         }
 
         // Top-left, top-right, bottom-right, bottom-left corners

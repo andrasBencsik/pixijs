@@ -18,6 +18,10 @@
         "project": "./tsconfig.json"
     },
     "rules": {
+        "newline-before-return": "off",
+        "simple-import-sort/imports": "off",
+        "no-trailing-spaces": "off",
+        "no-else-return": "off",
         "camelcase": [1, { "allow": ["^v\\d{1,}_\\d{1,}_\\d{1,}$"] }],
         "@typescript-eslint/triple-slash-reference": [1, { "path": "always" }],
         "@typescript-eslint/consistent-type-imports": [1, { "disallowTypeAnnotations": false }],
