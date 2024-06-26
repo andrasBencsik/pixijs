@@ -10,8 +10,13 @@ import '../../../src/scene/sprite-tiling/init';
 import '../../../src/scene/mesh/init';
 
 import type { TextureSource } from '../../../src/rendering/renderers/shared/texture/sources/TextureSource';
+<<<<<<< HEAD
 import { coverageResults } from '../../../customCoverageTool';
 import { writeFileSync } from 'fs-extra';
+=======
+import { writeFileSync } from 'fs-extra';
+import { coverageResults } from '../../../customCoverageTool';
+>>>>>>> origin/assignment1
 
 describe('TilingSprite', () =>
 {
@@ -120,6 +125,11 @@ describe('TilingSprite', () =>
             expect(bounds.minY).toBe(0);
             expect(bounds.maxY).toBe(256);
         });
+
+        afterEach(() =>
+            {
+                writeFileSync('coverageResults.json', JSON.stringify(coverageResults,null,2));
+            });
     });
 
     afterEach(() =>
@@ -206,6 +216,11 @@ describe('TilingSprite', () =>
 
                 expect(sprite.texture).toBe(texture);
             });
+
+            afterEach(() =>
+                {
+                    writeFileSync('coverageResults.json', JSON.stringify(coverageResults,null,2));
+                });
         });
 
         afterEach(() =>
@@ -246,7 +261,17 @@ describe('TilingSprite', () =>
 
                 expect(sprite.texture).toBeNull();
             });
+
+            afterEach(() =>
+                {
+                    writeFileSync('coverageResults.json', JSON.stringify(coverageResults,null,2));
+                });
         }); 
+
+        afterEach(() =>
+            {
+                writeFileSync('coverageResults.json', JSON.stringify(coverageResults,null,2));
+            });
     });
 
     afterEach(() =>
@@ -335,6 +360,11 @@ describe('TilingSprite', () =>
 
             expect(tilingSprite.texture).toEqual(Texture.EMPTY);
         });
+
+        afterEach(() =>
+        {
+            writeFileSync('coverageResults.json', JSON.stringify(coverageResults,null,2));
+        });
     });
 
     afterEach(() =>
@@ -357,6 +387,11 @@ describe('TilingSprite', () =>
 
             expect(spy).toHaveBeenCalledTimes(1);
         });
+
+        afterEach(() =>
+            {
+                writeFileSync('coverageResults.json', JSON.stringify(coverageResults,null,2));
+            });
     });
 
     afterEach(() =>

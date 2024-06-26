@@ -1,5 +1,7 @@
 import { Container } from '../../src/scene/container/Container';
 import { updateRenderGroupTransforms } from '../../src/scene/container/utils/updateRenderGroupTransforms';
+import { coverageResults } from '../../customCoverageTool';
+import { writeFileSync } from 'fs';
 
 describe('Transform Alpha', () =>
 {
@@ -35,6 +37,10 @@ describe('Transform Alpha', () =>
 
         expect(groupAlpha).toEqual(0);
     });
+    afterEach(() =>
+        {
+            writeFileSync('coverageResults.json', `${JSON.stringify(coverageResults, null, 2)}`);
+        });
 });
 
 // Test to cover

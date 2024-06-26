@@ -1,5 +1,7 @@
 import { Rectangle } from '../../src/maths/shapes/Rectangle';
 import { Triangle } from '../../src/maths/shapes/Triangle';
+import { coverageResults } from '../../customCoverageTool';
+import { writeFileSync } from 'fs';
 
 describe('Triangle', () =>
 {
@@ -80,5 +82,9 @@ describe('Triangle', () =>
         const expectRectangle = new Rectangle(4, 3, 8, 10);
 
         expect(bounds).toEqual(expectRectangle);
+    });
+    afterEach(() =>
+    {
+        writeFileSync('coverageResults.json', JSON.stringify(coverageResults, null, 2));
     });
 });

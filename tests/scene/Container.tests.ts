@@ -1,5 +1,7 @@
 import { Container } from '../../src/scene/container/Container';
 import { updateRenderGroupTransforms } from '../../src/scene/container/utils/updateRenderGroupTransforms';
+import { coverageResults } from '../../customCoverageTool';
+import { writeFileSync } from 'fs';
 
 describe('Container Tests', () =>
 {
@@ -202,6 +204,11 @@ describe('Container Tests', () =>
         expect(root.sortableChildren).toEqual(true);
         expect(root.children).toEqual([container2, container3, container1]);
     });
+
+    afterEach(() =>
+        {
+            writeFileSync('coverageResults.json', `${JSON.stringify(coverageResults, null, 2)}`);
+        });
 });
 
 // Test to cover

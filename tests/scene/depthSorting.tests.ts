@@ -1,4 +1,6 @@
 import { Container } from '../../src/scene/container/Container';
+import { coverageResults } from '../../customCoverageTool';
+import { writeFileSync } from 'fs';
 
 describe('Depth sorting', () =>
 {
@@ -65,4 +67,8 @@ describe('Depth sorting', () =>
 
         expect(parent.sortDirty).toBe(false);
     });
+    afterEach(() =>
+        {
+            writeFileSync('coverageResults.json', `${JSON.stringify(coverageResults, null, 2)}`);
+        });
 });

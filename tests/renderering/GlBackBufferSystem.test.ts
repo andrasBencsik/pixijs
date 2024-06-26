@@ -3,6 +3,8 @@ import { Container } from '../../src/scene/container/Container';
 import { getWebGLRenderer } from '../utils/getRenderer';
 
 import type { WebGLRenderer } from '../../src/rendering/renderers/gl/WebGLRenderer';
+import { writeFileSync } from 'fs';
+import { coverageResults } from '../../customCoverageTool';
 
 describe('GlBackBufferSystem', () =>
 {
@@ -61,4 +63,9 @@ describe('GlBackBufferSystem', () =>
         expect(renderer.gl.getContextAttributes().antialias).toEqual(false);
         expect(options.target.source.antialias).toEqual(true);
     });
+
+    afterEach(() =>
+        {   
+            writeFileSync('coverageResults.json', JSON.stringify(coverageResults, null, 2));
+        });
 });

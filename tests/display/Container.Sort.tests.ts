@@ -1,4 +1,6 @@
 import { Container } from '../../src/scene/container/Container';
+import { coverageResults } from '../../customCoverageTool';
+import { write, writeFileSync } from 'fs-extra';
 
 describe('Container Sort', () =>
 {
@@ -30,6 +32,11 @@ describe('Container Sort', () =>
             child.zIndex = 10;
 
             expect(parent.sortDirty).toBe(true);
+        });
+
+        afterEach(() =>
+        {
+            writeFileSync('coverageResults.json', `${JSON.stringify(coverageResults, null, 2)}`);
         });
     });
 
@@ -253,6 +260,11 @@ describe('Container Sort', () =>
             expect(container.children.indexOf(child1)).toEqual(2);
             expect(container.children.indexOf(child2)).toEqual(1);
             expect(container.children.indexOf(child4)).toEqual(0);
+        });
+
+        afterEach(() =>
+        {
+            writeFileSync('coverageResults.json', `${JSON.stringify(coverageResults, null, 2)}`);
         });
     });
 });

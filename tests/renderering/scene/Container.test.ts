@@ -1,4 +1,6 @@
 import { Container } from '../../../src/scene/container/Container';
+import { coverageResults } from '../../../customCoverageTool';
+import { writeFileSync } from 'fs';
 
 describe('Container', () =>
 {
@@ -14,6 +16,11 @@ describe('Container', () =>
             expect(container.children).toHaveLength(1);
             expect(child.parent).toEqual(container);
         });
+
+        afterEach(() =>
+            {
+                writeFileSync('coverageResults.json', JSON.stringify(coverageResults,null,2));
+            });
     });
 
     describe('events', () =>
@@ -79,6 +86,11 @@ describe('Container', () =>
 
             assertRemovedFromParent(parent, container, child, () => { container.addChild(child); });
         });
+
+        afterEach(() =>
+            {
+                writeFileSync('coverageResults.json', JSON.stringify(coverageResults,null,2));
+            });
     });
 
     describe('removeChildAt', () =>
@@ -90,6 +102,11 @@ describe('Container', () =>
 
             assertRemovedFromParent(parent, null, child, () => { parent.removeChildAt(0); });
         });
+
+        afterEach(() =>
+            {
+                writeFileSync('coverageResults.json', JSON.stringify(coverageResults,null,2));
+            });
     });
 
     describe('addChildAt', () =>
@@ -137,6 +154,11 @@ describe('Container', () =>
 
             assertRemovedFromParent(parent, container, child, () => { container.addChildAt(child, 0); });
         });
+
+        afterEach(() =>
+            {
+                writeFileSync('coverageResults.json', JSON.stringify(coverageResults,null,2));
+            });
     });
 
     describe('removeChild', () =>
@@ -167,6 +189,11 @@ describe('Container', () =>
 
             expect(container.children).toHaveLength(0);
         });
+
+        afterEach(() =>
+            {
+                writeFileSync('coverageResults.json', JSON.stringify(coverageResults,null,2));
+            });
     });
 
     describe('getChildIndex', () =>
@@ -189,6 +216,11 @@ describe('Container', () =>
             expect(() => container.getChildIndex(child))
                 .toThrow('The supplied Container must be a child of the caller');
         });
+
+        afterEach(() =>
+            {
+                writeFileSync('coverageResults.json', JSON.stringify(coverageResults,null,2));
+            });
     });
 
     describe('getChildAt', () =>
@@ -200,6 +232,11 @@ describe('Container', () =>
             expect(() => container.getChildAt(-1)).toThrow('getChildAt: Index (-1) does not exist.');
             expect(() => container.getChildAt(1)).toThrow('getChildAt: Index (1) does not exist.');
         });
+
+        afterEach(() =>
+            {
+                writeFileSync('coverageResults.json', JSON.stringify(coverageResults,null,2));
+            });
     });
 
     describe('setChildIndex', () =>
@@ -243,6 +280,11 @@ describe('Container', () =>
             container.setChildIndex(child, 0);
             expect(container.children.indexOf(child)).toEqual(0);
         });
+
+        afterEach(() =>
+            {
+                writeFileSync('coverageResults.json', JSON.stringify(coverageResults,null,2));
+            });
     });
 
     describe('swapChildren', () =>
@@ -276,6 +318,11 @@ describe('Container', () =>
             expect(container.children.indexOf(child2)).toEqual(0);
             expect(container.children.indexOf(child1)).toEqual(1);
         });
+
+        afterEach(() =>
+            {
+                writeFileSync('coverageResults.json', JSON.stringify(coverageResults,null,2));
+            });
     });
 
     describe('removeChildren', () =>
@@ -327,6 +374,11 @@ describe('Container', () =>
             expect(() => container.removeChildren(-1, 1))
                 .toThrow('removeChildren: numeric values are outside the acceptable range.');
         });
+
+        afterEach(() =>
+            {
+                writeFileSync('coverageResults.json', JSON.stringify(coverageResults,null,2));
+            });
     });
 
     describe('destroy', () =>
@@ -404,6 +456,11 @@ describe('Container', () =>
             expect(renderGroup2.renderGroupChildren).toBeNull();
             expect(renderGroup2['_onRenderContainers']).toBeNull();
         });
+
+        afterEach(() =>
+            {
+                writeFileSync('coverageResults.json', JSON.stringify(coverageResults,null,2));
+            });
     });
 
     function assertRemovedFromParent(parent: Container, container: Container, child: Container, functionToAssert: () => void)

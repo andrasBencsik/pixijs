@@ -1,5 +1,7 @@
 import { Point } from '../../src/maths/point/Point';
 import { Container } from '../../src/scene/container/Container';
+import { writeFileSync } from 'fs';
+import { coverageResults } from '../../customCoverageTool';
 
 describe('toLocal', () =>
 {
@@ -53,4 +55,9 @@ describe('toLocal', () =>
         expect(localPoint.x).toEqual(100);
         expect(localPoint.y).toEqual(100);
     });
+
+    afterEach(() =>
+        {   
+            writeFileSync('coverageResults.json', JSON.stringify(coverageResults, null, 2));
+        });
 });

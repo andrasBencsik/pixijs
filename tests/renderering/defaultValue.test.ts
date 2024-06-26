@@ -1,4 +1,6 @@
 import { defaultValue } from '../../src/rendering/renderers/gl/shader/program/defaultValue';
+import { coverageResults } from '../../customCoverageTool';
+import { writeFileSync } from 'fs';
 
 describe('defaultValue', () =>
 {
@@ -61,5 +63,9 @@ describe('defaultValue', () =>
     it('return null for unknown type', () =>
     {
         expect(defaultValue('unknown', 1)).toBeNull();
+    });
+    afterEach(() =>
+    {
+        writeFileSync('coverageResults.json', JSON.stringify(coverageResults, null, 2));
     });
 });

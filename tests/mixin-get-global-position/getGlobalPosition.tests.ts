@@ -1,4 +1,6 @@
 import { Container } from '../../src/scene/container/Container';
+import { writeFileSync } from 'fs';
+import { coverageResults } from '../../customCoverageTool';
 
 describe('Container#getGlobalPosition', () =>
 {
@@ -37,4 +39,9 @@ describe('Container#getGlobalPosition', () =>
         expect(globalPoint.x).toEqual(10); // this is the containers values from above unchanged
         expect(globalPoint.y).toEqual(-30); // this is the containers values from above unchanged
     });
+
+    afterEach(() =>
+        {   
+            writeFileSync('coverageResults.json', JSON.stringify(coverageResults, null, 2));
+        });
 });

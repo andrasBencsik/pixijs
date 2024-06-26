@@ -1,5 +1,7 @@
 import { Container } from '../../src/scene/container/Container';
 import { updateRenderGroupTransforms } from '../../src/scene/container/utils/updateRenderGroupTransforms';
+import { coverageResults } from '../../customCoverageTool';
+import { writeFileSync } from 'fs';
 
 describe('Transform Blend Modes', () =>
 {
@@ -73,6 +75,11 @@ describe('Transform Blend Modes', () =>
         updateRenderGroupTransforms(root.renderGroup, true);
 
         expect(child.groupBlendMode).toEqual('add');
+    });
+
+    afterEach(() =>
+    {
+        writeFileSync('coverageResults.json', `${JSON.stringify(coverageResults, null, 2)}`);
     });
 });
 

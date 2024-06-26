@@ -7,6 +7,8 @@ import { NineSliceSprite } from '../../src/scene/sprite-nine-slice/NineSliceSpri
 import { TilingSprite } from '../../src/scene/sprite-tiling/TilingSprite';
 import { Text } from '../../src/scene/text/Text';
 import { getTexture } from '../utils/getTexture';
+import { writeFileSync } from 'fs';
+import { coverageResults } from '../../customCoverageTool';
 
 describe('Add Children', () =>
 {
@@ -37,4 +39,8 @@ describe('Add Children', () =>
         expect(nineSlice.allowChildren).toBe(false);
         expect(graphics.allowChildren).toBe(false);
     });
+    afterEach(() =>
+        {
+            writeFileSync('coverageResults.json', `${JSON.stringify(coverageResults, null, 2)}`);
+        });
 });

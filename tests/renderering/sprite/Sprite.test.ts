@@ -7,6 +7,8 @@ import { Container } from '../../../src/scene/container/Container';
 import { Sprite } from '../../../src/scene/sprite/Sprite';
 import { getWebGLRenderer } from '../../utils/getRenderer';
 import { getTexture } from '../../utils/getTexture';
+import { writeFileSync } from 'fs';
+import { coverageResults } from '../../../customCoverageTool';
 
 describe('Sprite', () =>
 {
@@ -31,6 +33,11 @@ describe('Sprite', () =>
 
             sprite.destroy();
         });
+
+        afterEach(() =>
+            {
+                writeFileSync('coverageResults.json', JSON.stringify(coverageResults,null,2));
+            });
     });
 
     describe('destroy', () =>
@@ -65,6 +72,11 @@ describe('Sprite', () =>
 
             expect(renderer.renderPipes.sprite['_gpuSpriteHash'][sprite.uid]).toBeNull();
         });
+
+        afterEach(() =>
+            {
+                writeFileSync('coverageResults.json', JSON.stringify(coverageResults,null,2));
+            });
     });
 
     describe('width', () =>
@@ -104,6 +116,11 @@ describe('Sprite', () =>
 
             expect(sprite.width).toEqual(50);
         });
+
+        afterEach(() =>
+            {
+                writeFileSync('coverageResults.json', JSON.stringify(coverageResults,null,2));
+            });
     });
 
     describe('height', () =>
@@ -143,6 +160,11 @@ describe('Sprite', () =>
 
             expect(sprite.height).toEqual(50);
         });
+
+        afterEach(() =>
+            {
+                writeFileSync('coverageResults.json', JSON.stringify(coverageResults,null,2));
+            });
     });
 
     describe('getBounds', () =>
@@ -170,6 +192,11 @@ describe('Sprite', () =>
             expect(bounds.width).toEqual(400);
             expect(bounds.height).toEqual(600);
         });
+
+        afterEach(() =>
+            {
+                writeFileSync('coverageResults.json', JSON.stringify(coverageResults,null,2));
+            });
     });
 
     describe('getLocalBounds', () =>
@@ -218,6 +245,11 @@ describe('Sprite', () =>
             expect(bounds.width).toEqual(40);
             expect(bounds.height).toEqual(30);
         });
+
+        afterEach(() =>
+            {
+                writeFileSync('coverageResults.json', JSON.stringify(coverageResults,null,2));
+            });
     });
 
     describe('containsPoint', () =>
@@ -292,6 +324,11 @@ describe('Sprite', () =>
                 new Point(1, 1)
             )).toBe(true);
         });
+
+        afterEach(() =>
+            {
+                writeFileSync('coverageResults.json', JSON.stringify(coverageResults,null,2));
+            });
     });
 
     describe('tint', () =>
@@ -306,6 +343,11 @@ describe('Sprite', () =>
 
             sprite.destroy();
         });
+
+        afterEach(() =>
+            {
+                writeFileSync('coverageResults.json', JSON.stringify(coverageResults,null,2));
+            });
     });
 
     describe('init', () =>
@@ -322,5 +364,10 @@ describe('Sprite', () =>
             expect(sprite.anchor.x).toEqual(0.5);
             expect(sprite.anchor.y).toEqual(0.5);
         });
+
+        afterEach(() =>
+            {
+                writeFileSync('coverageResults.json', JSON.stringify(coverageResults,null,2));
+            });
     });
 });

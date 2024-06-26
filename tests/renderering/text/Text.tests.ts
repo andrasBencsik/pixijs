@@ -9,6 +9,8 @@ import { getWebGLRenderer } from '../../utils/getRenderer';
 import '../../../src/scene/graphics/init';
 import '../../../src/scene/text-bitmap/init';
 import '../../../src/scene/text/init';
+import { writeFileSync } from 'fs';
+import { coverageResults } from '../../../customCoverageTool';
 
 import type { DestroyOptions } from '../../../src/scene/container/destroyTypes';
 
@@ -72,6 +74,11 @@ describe('Text', () =>
 
             renderer.destroy();
         });
+
+        afterEach(() =>
+            {
+                writeFileSync('coverageResults.json', `${JSON.stringify(coverageResults, null, 2)}`);
+            });
     });
 
     describe('destroy', () =>
@@ -193,6 +200,11 @@ describe('Text', () =>
 
             expect(style.fill).toBe(null);
         });
+
+        afterEach(() =>
+            {
+                writeFileSync('coverageResults.json', `${JSON.stringify(coverageResults, null, 2)}`);
+            });
     });
 
     describe('text', () =>
@@ -251,6 +263,11 @@ describe('Text', () =>
             expect(text.width).toEqual(100);
             expect(text.height).toEqual(100);
         });
+
+        afterEach(() =>
+            {
+                writeFileSync('coverageResults.json', `${JSON.stringify(coverageResults, null, 2)}`);
+            });
     });
 
     it('should measure bounds of text correctly when padding is set', () =>
@@ -284,5 +301,9 @@ describe('Text', () =>
             expect(text.containsPoint(point)).toBe(true);
             text.anchor.set(0, 0);
         });
+        afterEach(() =>
+            {
+                writeFileSync('coverageResults.json', `${JSON.stringify(coverageResults, null, 2)}`);
+            });
     });
 });
