@@ -3,6 +3,8 @@ import { Graphics } from '../../../src/scene/graphics/shared/Graphics';
 import { GraphicsContext } from '../../../src/scene/graphics/shared/GraphicsContext';
 import { getWebGLRenderer } from '../../utils/getRenderer';
 import '../../../src/scene/graphics/init';
+import { writeFileSync } from 'fs-extra';
+import { coverageResults } from '../../../customCoverageTool';
 
 describe('Graphics Destroy', () =>
 {
@@ -84,5 +86,10 @@ describe('Graphics Destroy', () =>
         g.destroy();
 
         expect(spy).not.toHaveBeenCalled();
+    });
+
+    afterEach(() =>
+    {
+        writeFileSync('coverageResults.json', `${JSON.stringify(coverageResults, null, 2)}`);
     });
 });

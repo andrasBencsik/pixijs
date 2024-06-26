@@ -6,6 +6,8 @@ import { getApp } from '../utils/getApp';
 import { getWebGLRenderer } from '../utils/getRenderer';
 import '../../src/events/init';
 import '../../src/scene/graphics/init';
+import { writeFileSync } from 'fs';
+import { coverageResults } from '../../customCoverageTool';
 
 import type { RendererOptions } from '../../src/rendering/renderers/types';
 
@@ -1191,4 +1193,9 @@ describe('EventSystem', () =>
 
         expect(eventSpy).toHaveBeenCalledTimes(2);
     });
+
+    afterEach(() =>
+        {   
+            writeFileSync('coverageResults.json', JSON.stringify(coverageResults, null, 2));
+        });
 });

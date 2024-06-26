@@ -1,5 +1,7 @@
 import { Point } from '../../src/maths/point/Point';
 import { Container } from '../../src/scene/container/Container';
+import { writeFileSync } from 'fs';
+import { coverageResults } from '../../customCoverageTool';
 
 describe('toGlobal', () =>
 {
@@ -29,4 +31,9 @@ describe('toGlobal', () =>
         expect(globalPoint.x).toEqual(220);
         expect(globalPoint.y).toEqual(220);
     });
+
+    afterEach(() =>
+        {   
+            writeFileSync('coverageResults.json', JSON.stringify(coverageResults, null, 2));
+        });
 });

@@ -9,6 +9,8 @@ import { getWebGLRenderer } from '../utils/getRenderer';
 import '../../src/scene/text/init';
 import '../../src/scene/text-bitmap/init';
 import '../../src/scene/text-html/init';
+import { writeFileSync } from 'fs';
+import { coverageResults } from '../../customCoverageTool';
 
 describe('PrepareSystem', () =>
 {
@@ -71,6 +73,11 @@ describe('PrepareSystem', () =>
             prepare.add(graphics);
             expect(prepare.getQueue()).toEqual([graphics.context]);
         });
+
+        afterEach(() =>
+            {   
+                writeFileSync('coverageResults.json', JSON.stringify(coverageResults, null, 2));
+            });
     });
 
     describe('Uploading the queue', () =>
@@ -187,5 +194,10 @@ describe('PrepareSystem', () =>
                 expect(prepare.getQueue()).toHaveLength(0);
             });
         });
+
+        afterEach(() =>
+            {   
+                writeFileSync('coverageResults.json', JSON.stringify(coverageResults, null, 2));
+            });
     });
 });

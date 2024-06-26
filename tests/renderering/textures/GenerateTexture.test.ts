@@ -1,6 +1,8 @@
 import { Texture } from '../../../src/rendering/renderers/shared/texture/Texture';
 import { Container } from '../../../src/scene/container/Container';
 import { getWebGLRenderer } from '../../utils/getRenderer';
+import { writeFileSync } from 'fs';
+import { coverageResults } from '../../../customCoverageTool';
 
 import type { WebGLRenderer } from '../../../src/rendering/renderers/gl/WebGLRenderer';
 
@@ -25,4 +27,9 @@ describe('GenerateTexture', () =>
 
         expect(texture).toBeInstanceOf(Texture);
     });
+
+    afterEach(() =>
+        {
+            writeFileSync('coverageResults.json', `${JSON.stringify(coverageResults, null, 2)}`);
+        });
 });

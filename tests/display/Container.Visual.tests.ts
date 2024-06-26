@@ -2,6 +2,8 @@ import { DEG_TO_RAD, RAD_TO_DEG } from '../../src/maths/misc/const';
 import { Container } from '../../src/scene/container/Container';
 import { updateRenderGroupTransforms } from '../../src/scene/container/utils/updateRenderGroupTransforms';
 import { Sprite } from '../../src/scene/sprite/Sprite';
+import { writeFileSync } from 'fs';
+import { coverageResults } from '../../customCoverageTool';
 
 describe('Container Visual', () =>
 {
@@ -82,6 +84,10 @@ describe('Container Visual', () =>
                 expect(mask1.measurable).toBe(true);
             }
         );
+        afterEach(() =>
+            {   
+                writeFileSync('coverageResults.json', JSON.stringify(coverageResults, null, 2));
+            });
     });
 
     describe('alpha', () =>
@@ -103,6 +109,10 @@ describe('Container Visual', () =>
 
             expect(alpha).toBe(0.5);
         });
+        afterEach(() =>
+            {   
+                writeFileSync('coverageResults.json', JSON.stringify(coverageResults, null, 2));
+            });
     });
 
     describe('Layer Cascading Visibility', () =>
@@ -126,6 +136,10 @@ describe('Container Visual', () =>
             expect(child.globalDisplayStatus).toBe(0b101);
             expect(child.localDisplayStatus).toBe(0b111);
         });
+        afterEach(() =>
+            {   
+                writeFileSync('coverageResults.json', JSON.stringify(coverageResults, null, 2));
+            });
     });
 
     describe('rotation', () =>
@@ -147,6 +161,10 @@ describe('Container Visual', () =>
             expect(object.rotation).toEqual(180 * DEG_TO_RAD);
             expect(object.angle).toEqual(180);
         });
+        afterEach(() =>
+            {   
+                writeFileSync('coverageResults.json', JSON.stringify(coverageResults, null, 2));
+            });
     });
 
     describe('width', () =>
@@ -194,6 +212,10 @@ describe('Container Visual', () =>
             expect(container.getSize().height).toEqual(30);
             expect(container.height).toEqual(30);
         });
+        afterEach(() =>
+            {   
+                writeFileSync('coverageResults.json', JSON.stringify(coverageResults, null, 2));
+            });
     });
 
     describe('height', () =>
@@ -208,6 +230,10 @@ describe('Container Visual', () =>
             expect(container.height).toEqual(0);
             expect(container.scale.y).toEqual(1);
         });
+        afterEach(() =>
+            {   
+                writeFileSync('coverageResults.json', JSON.stringify(coverageResults, null, 2));
+            });
     });
 
     describe('scale', () =>
@@ -221,6 +247,10 @@ describe('Container Visual', () =>
             expect(container.scale.x).toEqual(2);
             expect(container.scale.y).toEqual(2);
         });
+        afterEach(() =>
+            {   
+                writeFileSync('coverageResults.json', JSON.stringify(coverageResults, null, 2));
+            });
     });
 
     describe('pivot', () =>
@@ -234,5 +264,10 @@ describe('Container Visual', () =>
             expect(container.pivot.x).toEqual(2);
             expect(container.pivot.y).toEqual(2);
         });
+        afterEach(() =>
+            {   
+                writeFileSync('coverageResults.json', JSON.stringify(coverageResults, null, 2));
+            });
     });
+
 });

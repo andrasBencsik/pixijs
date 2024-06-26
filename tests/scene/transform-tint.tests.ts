@@ -1,5 +1,7 @@
 import { Container } from '../../src/scene/container/Container';
 import { updateRenderGroupTransforms } from '../../src/scene/container/utils/updateRenderGroupTransforms';
+import { coverageResults } from '../../customCoverageTool';
+import { writeFileSync } from 'fs';
 
 function check32BitColorMatches(color1: number, color2: number[] | number): void
 {
@@ -224,5 +226,10 @@ describe('Transform Tints', () =>
         check32BitColorMatches(container2.renderGroup.worldColorAlpha, [127, 255, 255, 255]);
 
         check32BitColorMatches(child.groupColorAlpha, [255, 255, 255, 255]);
+    });
+
+    afterEach(() =>
+    {
+        writeFileSync('coverageResults.json', `${JSON.stringify(coverageResults, null, 2)}`);
     });
 });

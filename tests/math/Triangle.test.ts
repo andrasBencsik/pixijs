@@ -1,5 +1,7 @@
 import { Rectangle } from '../../src/maths/shapes/Rectangle';
 import { Triangle } from '../../src/maths/shapes/Triangle';
+import { coverageResults } from '../../customCoverageTool';
+import { writeFileSync } from 'fs';
 
 describe('Triangle', () =>
 {

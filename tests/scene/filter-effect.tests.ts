@@ -1,6 +1,8 @@
 import { AlphaFilter } from '../../src/filters/defaults/alpha/AlphaFilter';
 import { NoiseFilter } from '../../src/filters/defaults/noise/NoiseFilter';
 import { Container } from '../../src/scene/container/Container';
+import { coverageResults } from '../../customCoverageTool';
+import { writeFileSync } from 'fs';
 
 import type { FilterEffect } from '../../src/filters/FilterEffect';
 
@@ -136,4 +138,8 @@ describe('Filter effect', () =>
         expect(container.effects.length).toBe(1);
         expect((container.effects[0] as FilterEffect).filters).toEqual([alphaFilter]);
     });
+    afterEach(() =>
+        {
+            writeFileSync('coverageResults.json', `${JSON.stringify(coverageResults, null, 2)}`);
+        });
 });

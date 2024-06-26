@@ -4,6 +4,8 @@ import { MeshGeometry } from '../../../src/scene/mesh/shared/MeshGeometry';
 import { getWebGLRenderer } from '../../utils/getRenderer';
 import { getTexture } from '../../utils/getTexture';
 import '../../../src/scene/mesh/init';
+import { coverageResults } from '../../../customCoverageTool';
+import { writeFileSync } from 'fs-extra';
 
 function getMesh(batched = true)
 {
@@ -93,5 +95,10 @@ describe('Mesh', () =>
         expect(mesh.tint).toBe(0xff0000);
 
         mesh.destroy();
+    });
+
+    afterEach(() =>
+    {
+        writeFileSync('coverageResults.json', `${JSON.stringify(coverageResults, null, 2)}`);
     });
 });

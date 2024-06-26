@@ -11,6 +11,8 @@ import { QuadGeometry } from '../../src/scene/sprite-tiling/utils/QuadGeometry';
 import { Text } from '../../src/scene/text/Text';
 import { HTMLText } from '../../src/scene/text-html/HTMLText';
 import '../../src/environment-browser/browserAll';
+import { writeFileSync } from 'fs';
+import { coverageResults } from '../../customCoverageTool';
 
 import type { GlGraphicsAdaptor } from '../../src/scene/graphics/gl/GlGraphicsAdaptor';
 
@@ -192,4 +194,9 @@ describe('Round Pixels', () =>
         // this test covers mesh and tiling sprite (as mesh is used under the hood)
         expect(renderData.shader.resources.localUniforms.uniforms.uRound).toBe(1);
     });
+
+    afterEach(() =>
+        {   
+            writeFileSync('coverageResults.json', JSON.stringify(coverageResults, null, 2));
+        });
 });

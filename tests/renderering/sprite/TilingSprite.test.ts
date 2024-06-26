@@ -10,6 +10,8 @@ import '../../../src/scene/sprite-tiling/init';
 import '../../../src/scene/mesh/init';
 
 import type { TextureSource } from '../../../src/rendering/renderers/shared/texture/sources/TextureSource';
+import { writeFileSync } from 'fs-extra';
+import { coverageResults } from '../../../customCoverageTool';
 
 describe('TilingSprite', () =>
 {
@@ -118,6 +120,11 @@ describe('TilingSprite', () =>
             expect(bounds.minY).toBe(0);
             expect(bounds.maxY).toBe(256);
         });
+
+        afterEach(() =>
+            {
+                writeFileSync('coverageResults.json', JSON.stringify(coverageResults,null,2));
+            });
     });
 
     describe('ClampMargin', () =>
@@ -199,6 +206,11 @@ describe('TilingSprite', () =>
 
                 expect(sprite.texture).toBe(texture);
             });
+
+            afterEach(() =>
+                {
+                    writeFileSync('coverageResults.json', JSON.stringify(coverageResults,null,2));
+                });
         });
 
         describe('Destroy', () =>
@@ -234,7 +246,17 @@ describe('TilingSprite', () =>
 
                 expect(sprite.texture).toBeNull();
             });
+
+            afterEach(() =>
+                {
+                    writeFileSync('coverageResults.json', JSON.stringify(coverageResults,null,2));
+                });
         }); 
+
+        afterEach(() =>
+            {
+                writeFileSync('coverageResults.json', JSON.stringify(coverageResults,null,2));
+            });
     });
 
     describe('Geometry', () =>
@@ -313,6 +335,11 @@ describe('TilingSprite', () =>
 
             expect(tilingSprite.texture).toEqual(Texture.EMPTY);
         });
+
+        afterEach(() =>
+        {
+            writeFileSync('coverageResults.json', JSON.stringify(coverageResults,null,2));
+        });
     });
 
     describe('Anchor', () =>
@@ -330,5 +357,10 @@ describe('TilingSprite', () =>
 
             expect(spy).toHaveBeenCalledTimes(1);
         });
+
+        afterEach(() =>
+            {
+                writeFileSync('coverageResults.json', JSON.stringify(coverageResults,null,2));
+            });
     });
 });

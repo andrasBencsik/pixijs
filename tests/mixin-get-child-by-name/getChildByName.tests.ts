@@ -1,5 +1,7 @@
 import { Container } from '../../src/scene/container/Container';
 // import '../../src/scene/container/container-mixins/findMixin';
+import { coverageResults } from '../../customCoverageTool';
+import { writeFileSync } from 'fs';
 
 describe('Container#name', () =>
 {
@@ -10,6 +12,10 @@ describe('Container#name', () =>
         expect(obj.label).toBeDefined();
         expect(obj.label).toBeNull();
     });
+    afterEach(() =>
+        {   
+            writeFileSync('coverageResults.json', JSON.stringify(coverageResults, null, 2));
+        });
 });
 
 describe('Container#getChildByName', () =>
@@ -70,4 +76,9 @@ describe('Container#getChildByName', () =>
 
         expect(stage.getChildByName('mock-target', true)).toEqual(uncle);
     });
+
+    afterEach(() =>
+        {   
+            writeFileSync('coverageResults.json', JSON.stringify(coverageResults, null, 2));
+        });
 });

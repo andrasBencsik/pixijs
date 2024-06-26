@@ -2,6 +2,8 @@ import { Matrix } from '../../src/maths/matrix/Matrix';
 import { Container } from '../../src/scene/container/Container';
 import { updateRenderGroupTransforms } from '../../src/scene/container/utils/updateRenderGroupTransforms';
 import { DummyView } from './DummyView';
+import { coverageResults } from '../../customCoverageTool';
+import { writeFileSync } from 'fs';
 
 describe('Transform updates', () =>
 {
@@ -287,5 +289,10 @@ describe('Transform updates', () =>
 
         expect(container2.relativeGroupTransform.tx).toEqual(20);
         expect(container2.worldTransform.tx).toEqual(20);
+    });
+
+    afterEach(() =>
+    {
+        writeFileSync('coverageResults.json', `${JSON.stringify(coverageResults, null, 2)}`);
     });
 });

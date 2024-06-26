@@ -1,4 +1,6 @@
 import { Container } from '../../../src/scene/container/Container';
+import { coverageResults } from '../../../customCoverageTool';
+import { writeFileSync } from 'fs';
 
 describe('Container#Label', () =>
 {
@@ -9,6 +11,10 @@ describe('Container#Label', () =>
         expect(obj.label).toBeDefined();
         expect(obj.label).toBeNull();
     });
+    afterEach(() =>
+        {
+            writeFileSync('coverageResults.json', JSON.stringify(coverageResults,null,2));
+        });
 });
 
 describe('Container#getChildByLabel', () =>
@@ -69,4 +75,9 @@ describe('Container#getChildByLabel', () =>
 
         expect(stage.getChildByLabel('mock-target', true)).toEqual(uncle);
     });
+
+    afterEach(() =>
+        {
+            writeFileSync('coverageResults.json', JSON.stringify(coverageResults,null,2));
+        });
 });

@@ -10,6 +10,8 @@ import { getWebGLRenderer } from '../../utils/getRenderer';
 import { getTexture } from '../../utils/getTexture';
 import '../../../src/rendering/init';
 import '../../../src/scene/graphics/init';
+import { coverageResults } from '../../../customCoverageTool';
+import { writeFileSync } from 'fs-extra';
 
 import type { WebGLRenderer } from '../../../src/rendering/renderers/gl/WebGLRenderer';
 
@@ -63,6 +65,11 @@ describe('GenerateTexture', () =>
 
             expect(texture).toBeInstanceOf(Texture);
         });
+
+        afterEach(() =>
+        {   
+            writeFileSync('coverageResults.json', JSON.stringify(coverageResults, null, 2));
+        });
     });
 
     describe('Texture as source', () =>
@@ -104,6 +111,10 @@ describe('GenerateTexture', () =>
             expect(pixels.width).toBe(renderTexture.width);
             expect(pixels.height).toBe(renderTexture.height);
         });
+        afterEach(() =>
+            {   
+                writeFileSync('coverageResults.json', JSON.stringify(coverageResults, null, 2));
+            });
     });
 
     it('should access extract on renderer', async () =>
@@ -492,4 +503,10 @@ describe('GenerateTexture', () =>
                 'ImageSource: Image element passed, converting to canvas. Use CanvasSource instead.'
             );
     });
+    afterEach(() =>
+        {   
+            writeFileSync('coverageResults.json', JSON.stringify(coverageResults, null, 2));
+        });
+
+
 });

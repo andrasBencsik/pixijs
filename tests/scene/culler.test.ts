@@ -8,6 +8,8 @@ import { Container } from '../../src/scene/container/Container';
 import { Graphics } from '../../src/scene/graphics/shared/Graphics';
 import { Sprite } from '../../src/scene/sprite/Sprite';
 import { basePath } from '../assets/basePath';
+import { writeFileSync } from 'fs';
+import { coverageResults } from '../../customCoverageTool';
 
 import type { Texture } from '../../src/rendering/renderers/shared/texture/Texture';
 
@@ -191,4 +193,8 @@ describe('Culler', () =>
         expect(container.culled).toBe(true);
         expect(graphics.culled).toBe(false);
     });
+    afterEach(() =>
+        {
+            writeFileSync('coverageResults.json', `${JSON.stringify(coverageResults, null, 2)}`);
+        });
 });

@@ -1,5 +1,7 @@
 import { Container } from '../../src/scene/container/Container';
 import { checkChildrenDidChange } from '../../src/scene/container/utils/checkChildrenDidChange';
+import { coverageResults } from '../../customCoverageTool';
+import { writeFileSync } from 'fs';
 
 describe('checkChildrenDidChange', () =>
 {
@@ -55,4 +57,8 @@ describe('checkChildrenDidChange', () =>
             didChange: true,
         });
     });
+    afterEach(() =>
+        {
+            writeFileSync('coverageResults.json', `${JSON.stringify(coverageResults, null, 2)}`);
+        });
 });

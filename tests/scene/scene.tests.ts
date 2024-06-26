@@ -1,6 +1,8 @@
 import { Container } from '../../src/scene/container/Container';
 
 import type { RenderGroup } from '../../src/scene/container/RenderGroup';
+import { coverageResults } from '../../customCoverageTool';
+import { writeFileSync } from 'fs';
 
 // now that we don't actually remove the items, but instead ensure that they are skipped
 // in the update loop, this function will return the new list and index removing items that are intended to be skipped
@@ -629,5 +631,10 @@ describe('Scene', () =>
         expect(child.parent).toEqual(null);
         // container.removeChild(child);
     });
+
+    afterEach(() =>
+        {
+            writeFileSync('coverageResults.json', `${JSON.stringify(coverageResults, null, 2)}`);
+        });
 });
 

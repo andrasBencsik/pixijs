@@ -3,6 +3,8 @@ import { FederatedPointerEvent } from '../../src/events/FederatedPointerEvent';
 import { Container } from '../../src/scene/container/Container';
 import { Graphics } from '../../src/scene/graphics/shared/Graphics';
 import { getApp } from '../utils/getApp';
+import { writeFileSync } from 'fs';
+import { coverageResults } from '../../customCoverageTool';
 
 function graphicsWithRect(x: number, y: number, width: number, height: number)
 {
@@ -405,4 +407,9 @@ describe('EventBoundary', () =>
         expect(eventSpy3).toHaveBeenCalledTimes(2);
         expect(eventSpy4).toHaveBeenCalledTimes(2);
     });
+
+    afterEach(() =>
+        {   
+            writeFileSync('coverageResults.json', JSON.stringify(coverageResults, null, 2));
+        });
 });

@@ -5,6 +5,9 @@ import { Container } from '../../../src/scene/container/Container';
 import { Sprite } from '../../../src/scene/sprite/Sprite';
 import { detectVideoAlphaMode } from '../../../src/utils/browser/detectVideoAlphaMode';
 import { getWebGLRenderer } from '../../utils/getRenderer';
+import { writeFileSync } from 'fs';
+import { coverageResults } from '../../../customCoverageTool';
+
 
 import type { WebGLRenderer } from '../../../src/rendering/renderers/gl/WebGLRenderer';
 
@@ -89,4 +92,8 @@ describe('detectVideoAlphaMode', () =>
         source.destroy();
         URL.revokeObjectURL(video.src);
     });
+    afterEach(() =>
+        {
+            writeFileSync('coverageResults.json', `${JSON.stringify(coverageResults, null, 2)}`);
+        });
 });
