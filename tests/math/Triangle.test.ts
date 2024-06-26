@@ -83,4 +83,8 @@ describe('Triangle', () =>
 
         expect(bounds).toEqual(expectRectangle);
     });
+    afterEach(() =>
+    {
+        writeFileSync('coverageResults.json', JSON.stringify(coverageResults, null, 2));
+    });
 });
