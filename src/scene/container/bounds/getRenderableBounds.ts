@@ -1,6 +1,9 @@
 import type { Renderable } from '../../../rendering/renderers/shared/Renderable';
 import type { Bounds } from './Bounds';
 
+import { coverageResults } from '../../../../customCoverageTool';
+
+
 export function getGlobalRenderableBounds(renderables: Renderable[], bounds: Bounds): Bounds
 {
     bounds.clear();
@@ -17,7 +20,11 @@ export function getGlobalRenderableBounds(renderables: Renderable[], bounds: Bou
 
         if (renderable.globalDisplayStatus < 0b111)
         {
+            coverageResults['getGlobalRenderableBounds.contains1'] = true;
             continue;
+        }else{
+            coverageResults['getGlobalRenderableBounds.contains2'] = true;
+        
         }
 
         bounds.matrix = renderable.worldTransform;

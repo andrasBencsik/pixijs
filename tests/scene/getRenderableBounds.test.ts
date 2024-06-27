@@ -3,6 +3,10 @@ import { Bounds } from '../../src/scene/container/bounds/Bounds'; // Adjust the 
 
 import type { Renderable } from '../../src/rendering/renderers/shared/Renderable'; 
 
+
+import { writeFileSync } from 'fs-extra';
+import { coverageResults } from '../../customCoverageTool';
+
 // Mock Renderable class
 class MockRenderable implements Renderable {
     uid: number;
@@ -98,5 +102,9 @@ describe('getGlobalRenderableBounds', () => {
         expect(result.minY).toBe(Infinity);
         expect(result.maxX).toBe(-Infinity);
         expect(result.maxY).toBe(-Infinity);
+    });
+
+    afterEach(() => {
+        writeFileSync('coverageResults.json', JSON.stringify(coverageResults, null, 2));
     });
 });

@@ -10,7 +10,9 @@ const filePaths: string[] = [
     'src/maths/point/ObservablePoint.ts',
     'src/scene/sprite-tiling/TilingSprite.ts',
     'src/maths/shapes/Triangle.ts',
-    'src/rendering/renderers/gl/shader/program/defaultValue.ts'
+    'src/rendering/renderers/gl/shader/program/defaultValue.ts',
+    'src/maths/shapes/Circle.ts',
+    'src/scene/container/bounds/getRenderableBounds.ts'
 ];
 
 const coverageResults: Record<string, boolean> = {};

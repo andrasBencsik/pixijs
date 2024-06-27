@@ -1,5 +1,7 @@
 import { Circle } from '../../src/maths/shapes/Circle';
 import { Rectangle } from '../../src/maths/shapes/Rectangle';
+import { writeFileSync } from 'fs-extra';
+import { coverageResults } from '../../customCoverageTool';
 
 describe('Circle', () => {
     it('should copy properties from another circle using copyFrom', () => {
@@ -67,5 +69,9 @@ describe('Circle', () => {
         expect(bounds.y).toBe(-5);
         expect(bounds.width).toBe(20);
         expect(bounds.height).toBe(20);
+    });
+
+    afterEach(() => {
+        writeFileSync('coverageResults.json', JSON.stringify(coverageResults, null, 2));
     });
 });

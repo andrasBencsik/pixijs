@@ -3,6 +3,9 @@ import { Rectangle } from './Rectangle';
 import type { SHAPE_PRIMITIVE } from '../misc/const';
 import type { ShapePrimitive } from './ShapePrimitive';
 
+import { coverageResults } from '../../../customCoverageTool';
+
+
 /**
  * The Circle object is used to help draw graphics and can also be used to specify a hit area for containers.
  * @memberof maths
@@ -62,8 +65,12 @@ export class Circle implements ShapePrimitive
      */
     public contains(x: number, y: number): boolean
     {
-        if (this.radius <= 0) return false;
-
+        if (this.radius <= 0){
+            coverageResults['Circle.contains1'] = true;
+            return false;
+        } else {
+            coverageResults['Circle.contains2'] = true;
+        }
         const r2 = this.radius * this.radius;
         let dx = (this.x - x);
         let dy = (this.y - y);
@@ -83,7 +90,12 @@ export class Circle implements ShapePrimitive
      */
     public strokeContains(x: number, y: number, width: number): boolean
     {
-        if (this.radius === 0) return false;
+        if (this.radius === 0) {
+            coverageResults['Circle.contains3'] = true;
+            return false;
+        }else {
+            coverageResults['Circle.contains4'] = true;
+        }
 
         const dx = (this.x - x);
         const dy = (this.y - y);
