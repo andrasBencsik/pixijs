@@ -1,4 +1,6 @@
 import { Circle } from '../../src/maths/shapes/Circle';
+import { coverageResults } from '../../customCoverageTool';
+import { writeFileSync } from 'fs-extra';
 
 describe('Circle', () =>
 {
@@ -86,5 +88,10 @@ describe('Circle', () =>
         expect(rect1.top).toEqual(5);
         expect(rect1.right).toEqual(15);
         expect(rect1.bottom).toEqual(15);
+    });
+
+    afterEach(() =>
+    {
+        writeFileSync('coverageResults.json', JSON.stringify(coverageResults));
     });
 });
